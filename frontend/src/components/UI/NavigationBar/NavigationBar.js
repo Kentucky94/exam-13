@@ -12,7 +12,7 @@ const NavigationBar = () => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand className='mr-auto' tag={NavLink} to='/'>Gallery App</NavbarBrand>
+        <NavbarBrand className='mr-auto' tag={NavLink} to='/'>My App</NavbarBrand>
         <div>
           {user ? <UserMenu user={user}/> : <AnonymousMenu />}
         </div>

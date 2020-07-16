@@ -1,5 +1,6 @@
 import axiosOrders from "../../axiosOrders";
 import {push} from 'connected-react-router';
+import {toast} from 'react-toastify';
 
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -42,6 +43,7 @@ export const registerUser = userData => {
       await axiosOrders.post('/users', userData);
 
       dispatch(registerUserSuccess());
+      toast.success('Registration complete');
       dispatch(push('/'));
     } catch (error) {
       console.log(error);

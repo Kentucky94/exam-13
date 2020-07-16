@@ -1,8 +1,9 @@
 import axios from 'axios';
 import {store} from "./index";
+import config from "./config";
 
 const axiosOrders = axios.create({
-  baseURL: 'http://localhost:8080'
+  baseURL: config.apiURL
 });
 
 axiosOrders.interceptors.request.use(config => {
