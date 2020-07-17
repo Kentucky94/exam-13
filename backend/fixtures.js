@@ -19,6 +19,7 @@ const run = async () => {
     password: 'password1',
     token: nanoid(),
     displayName: 'Albert Wesker',
+    role: 'admin',
   }, {
     username: 'user2',
     password: 'password2',
@@ -41,11 +42,17 @@ const run = async () => {
     user: user2,
     mainImage: '/recipe2.jpg',
     description: 'Recipe by user2',
+    easyToCookRating: 4,
+    quickToCookRating: 3,
+    tasteRating: 4,
   }, {
     title: 'The third recipe',
     user: user3,
     mainImage: '/recipe3.jpg',
     description: 'Recipe by user3',
+    easyToCookRating: 4,
+    quickToCookRating: 3,
+    tasteRating: 5,
   });
 
   mongoose.connection.close();

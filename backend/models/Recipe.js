@@ -22,10 +22,6 @@ const RecipeSchema = new mongoose.Schema({
   images: [{
     type: String,
   }],
-  reviews: [{
-    type: mongoose.Schema.Types.ObjectID,
-    ref: 'Review'
-  }],
   easyToCookRating: {
     type: Number,
     default: 0,
@@ -45,7 +41,9 @@ const RecipeSchema = new mongoose.Schema({
 });
 
 RecipeSchema.pre('save', async function(next){
-  this.overallRating = (this.easyToCookRating + this.quickToCookRating + this.tasteRating) / 3;
+  const average = (this.easyToCookRating + this.quickToCookRating + this.tasteRating) / 3;
+
+  this.overallRating = average.toFixed(1);
 
   next();
 });
