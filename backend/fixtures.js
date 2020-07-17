@@ -3,6 +3,7 @@ const {nanoid} = require('nanoid');
 
 const config = require('./config');
 const User = require('./models/User');
+const Recipe = require('./models/Recipe');
 
 const run = async () => {
   await mongoose.connect(config.database, config.databaseOptions);
@@ -28,6 +29,23 @@ const run = async () => {
     password: 'password3',
     token: nanoid(),
     displayName: 'Jill Valentine',
+  });
+
+  const [rec1, rec2, rec3] = await Recipe.create({
+    title: 'The first recipe',
+    user: user1,
+    mainImage: '/recipe1.jpg',
+    description: 'Recipe by user1',
+  }, {
+    title: 'The second recipe',
+    user: user2,
+    mainImage: '/recipe2.jpg',
+    description: 'Recipe by user2',
+  }, {
+    title: 'The third recipe',
+    user: user3,
+    mainImage: '/recipe3.jpg',
+    description: 'Recipe by user3',
   });
 
   mongoose.connection.close();

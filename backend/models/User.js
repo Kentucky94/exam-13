@@ -22,9 +22,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  facebookId: {
+  role: {
     type: String,
-    default: '',
+    default: 'user',
+    enum: ['user', 'admin']
   },
   token: {
     type: String,

@@ -22,8 +22,4 @@ module.exports = {
     useUnifiedTopology: true,
     useCreateIndex: true,
   },
-  facebook: {
-    appId: '237001530836786',
-    appSecret: 'e562695461ce358cdf9905a5e5db6126'
-  }
 };
