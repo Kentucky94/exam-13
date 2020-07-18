@@ -50,9 +50,12 @@ const FormElement = props => {
 
 FormElement.propTypes = {
   propertyName: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   required: PropTypes.bool,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool
+  ]),
   onChange: PropTypes.func.isRequired,
 };
 
