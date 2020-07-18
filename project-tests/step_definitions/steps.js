@@ -1,24 +1,23 @@
 const { I } = inject();
 // Add in your custom step files
 
-Given('I am on register page', () => {
-  I.amOnPage('/register');
-  I.wait(2);
-});
-
 Given('I am on login page', () => {
   I.wait(5)
   I.amOnPage('/login');
   I.wait(5);
 });
 
-Given('I am on main page', () => {
-  I.amOnPage('/');
-  I.wait(2);
-});
-
 Given('I attach file {string}', path => {
   I.attachFile('input[name=mainImage]', path)
+});
+
+Given('I select options:', table => {
+  // From "features/basic.feature" {"line":7,"column":5}
+  const tableData = table.parse().rawData;
+
+  tableData.forEach(row => {
+    I.selectOption(row[0], row[1]);
+  });
 });
 
 Given('I fill out input data:', table => {

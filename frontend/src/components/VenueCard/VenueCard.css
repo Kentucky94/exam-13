@@ -1,0 +1,8 @@
+.venueCard{
+  color: inherit;
+}
+
+.venueCard:hover{
+  text-decoration: none;
+  background: lightblue;
+}

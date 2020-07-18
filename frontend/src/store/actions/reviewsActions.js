@@ -1,5 +1,6 @@
 import axiosOrders from "../../axiosOrders";
 import {getVenue} from "./venuesActions";
+import {toast} from 'react-toastify';
 
 export const GET_VENUE_REVIEWS_SUCCESS = 'GET_VENUE_REVIEWS_SUCCESS';
 
@@ -25,6 +26,7 @@ export const postReview = (venueId, reviewData) => {
 
       dispatch(getVenueReviews(venueId));
       dispatch(getVenue(venueId));
+      toast.success('Review has been added')
     }catch(error){
       console.log(error)
     }
