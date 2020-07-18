@@ -51,25 +51,9 @@ router.post('/', [auth, upload.single('mainImage')], async (req, res) => {
       mainImage: req.file.filename,
     };
 
+    if(!req.body.isAgreed || !JSON.parse(req.body.isAgreed)) return res.status(400).send({error: 'You must agree to Terms and Conditions!'});
+
     const venue = new Venue(venueData);
-
-    await venue.save();
-
-    return res.send(venue);
-  }catch(error){
-    return res.status(500).send(error);
-  }
-});
-
-router.post('/addImg/:venueId', [auth, upload.single('images')], async (req, res) => {
-  try{
-    const venue = await Venue.findById(req.params.venueId);
-
-    if(req.file){
-      venue.images.push(req.file.filename);
-    }else{
-      return res.status(400).send({error: 'No image'})
-    }
 
     await venue.save();
 
@@ -82,11 +66,9 @@ router.post('/addImg/:venueId', [auth, upload.single('images')], async (req, res
 router.post('/reRate/:venueId', [auth], async (req, res) => {
   try{
     const venue = await Venue.findById(req.params.venueId);
-
     const reviews = await Review.find({venue: req.params.venueId});
 
     if(!venue) return res.status(400).send({error: 'No venues found'});
-    if(!reviews) return res.status(400).send({error: 'No reviews found'});
 
     let foodAverage = venue.foodRating;
     let serviceAverage = venue.serviceRating;
@@ -109,7 +91,9 @@ router.post('/reRate/:venueId', [auth], async (req, res) => {
       serviceAverage = serviceSummary / reviews.length;
       interiorAverage = interiorSummary / reviews.length;
     }else{
-      return res.status(400).send({error: 'No reviews found'})
+      foodAverage = 0;
+      serviceAverage = 0;
+      interiorAverage = 0;
     }
 
     venue.foodRating = foodAverage.toFixed(1);

@@ -36,7 +36,7 @@ export const postVenue = venueData => {
   return async dispatch => {
     try{
       await axiosOrders.post('/venues', venueData);
-      toast.success('Your venue has been posted.');
+      toast.success('Your venue has been posted');
       dispatch(push('/'));
     }catch(error){
       console.log(error);

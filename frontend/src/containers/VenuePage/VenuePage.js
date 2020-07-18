@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import {Button, Container, Form, FormGroup, Input, Label, Table} from "reactstrap";
 import StarRatings from "react-star-ratings";
 
+import config from '../../config';
+
 import {getVenue} from "../../store/actions/venuesActions";
 import {getVenueReviews, postReview} from "../../store/actions/reviewsActions";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
@@ -102,7 +104,7 @@ class VenuePage extends Component {
             <p>{description}</p>
           </div>
           <div className='w-50 p-4'>
-            <img className='w-100' src={`http://localhost:8080/uploads/${image}`} alt=""/>
+            <img className='w-100' src={`${config.apiURL}/uploads/${image}`} alt=""/>
           </div>
         </div>
 

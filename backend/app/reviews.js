@@ -7,6 +7,16 @@ const permit = require('../middleware/permit');
 
 const router =  express.Router();
 
+router.get('/:venueId', [auth], async (req, res) => {
+  try{
+    const reviews = await Review.find({venue: req.params.venueId}).populate({path: 'user', select: ['displayName']});
+
+    return res.send(reviews);
+  }catch(error){
+    console.log(error);
+  }
+});
+
 router.post('/:venueId', [auth], async (req, res) => {
   try{
     const reviewData = {

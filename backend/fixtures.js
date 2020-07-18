@@ -19,7 +19,7 @@ const run = async () => {
     username: 'user1',
     password: 'password1',
     token: nanoid(),
-    displayName: 'Albert Wesker',
+    displayName: 'Admin Adminov',
     role: 'admin',
   }, {
     username: 'user2',
@@ -36,41 +36,18 @@ const run = async () => {
   const [ven1, ven2, ven3] = await Venue.create({
     title: 'The first venue',
     user: user1,
-    mainImage: '/venue1.jpg',
+    mainImage: 'fixtures/venue1.jpg',
     description: 'Venue owned by user1',
   }, {
     title: 'The second venue',
     user: user2,
-    mainImage: '/venue2.jpg',
+    mainImage: 'fixtures/venue2.jpeg',
     description: 'Venue owned by user2',
   }, {
     title: 'The third venue',
     user: user3,
-    mainImage: '/venue3.jpg',
+    mainImage: 'fixtures/venue3.jpeg',
     description: 'Venue owned by user3',
-  });
-
-  const [rew1, rew2, rew3] = await Review.create({
-    user: user1,
-    venue: ven2,
-    comment: 'Good',
-    foodRating: 4,
-    serviceRating: 3,
-    interiorRating: 5,
-  }, {
-    user: user2,
-    venue: ven3,
-    comment: 'Average',
-    foodRating: 3,
-    serviceRating: 3,
-    interiorRating: 4,
-  }, {
-    user: user3,
-    venue: ven1,
-    comment: 'Bad',
-    foodRating: 3,
-    serviceRating: 3,
-    interiorRating: 2,
   });
 
   mongoose.connection.close();

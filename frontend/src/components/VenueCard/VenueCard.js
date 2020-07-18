@@ -3,6 +3,8 @@ import StarRatings from "react-star-ratings";
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 
+import config from '../../config';
+
 import {deleteVenue} from "../../store/actions/venuesActions";
 
 import {
@@ -16,7 +18,7 @@ const VenueCard = props => {
 
   return (
     <Card className='col-sm-6 col-md-4 mb-4 p-2'>
-      <CardImg top width="100%" height="45%" src={`http://localhost:8080/uploads/${props.image}`} alt="Card image cap" />
+      <CardImg top width="100%" height="45%" src={`${config.apiURL}/uploads/${props.image}`} alt="Card image cap" />
       <CardBody>
         <CardTitle>{props.title}</CardTitle>
         <CardText>{props.description}</CardText>

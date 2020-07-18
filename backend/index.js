@@ -6,6 +6,7 @@ const config = require('./config');
 const users = require('./app/users');
 const venues = require('./app/venues');
 const reviews = require('./app/reviews');
+const images = require('./app/images');
 
 const app = express();
 
@@ -19,6 +20,7 @@ const run = async () => {
   app.use('/users', users);
   app.use('/venues', venues);
   app.use('/reviews', reviews);
+  app.use('/images', images);
 
   app.listen(config.port, () => {
     console.log(`Server started on ${config.port}`);
