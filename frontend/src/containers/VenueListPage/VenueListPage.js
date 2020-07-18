@@ -14,15 +14,17 @@ class VenueListPage extends Component {
     const venues = this.props.venues.map(venue => {
       return <VenueCard
         key={venue._id}
+        id={venue._id}
         image={venue.mainImage}
         title={venue.title}
         description={venue.description}
+        rating={venue.overallRating}
       />
     });
 
     return (
       <Container>
-        <div className='row flex-wrap justify-content-between'>
+        <div className='row flex-wrap justify-content-start'>
           {venues}
         </div>
       </Container>

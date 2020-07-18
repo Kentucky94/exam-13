@@ -24,6 +24,20 @@ const FormElement = props => {
     );
   }
 
+  if(props.type === 'checkbox'){
+    inputData = (
+      <Input
+        addon
+        type="checkbox"
+        name={props.propertyName}
+        id={props.propertyName}
+        onChange={props.onChange}
+        value={props.value}
+        required={props.required}
+      />
+    )
+  }
+
   return (
     <FormGroup row>
       <Label sm={2} for={props.propertyName}>{props.title}</Label>
