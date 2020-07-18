@@ -6,6 +6,7 @@ import StarRatings from "react-star-ratings";
 
 import {getVenue} from "../../store/actions/venuesActions";
 import {getVenueReviews, postReview} from "../../store/actions/reviewsActions";
+import ReviewCard from "../../components/ReviewCard/ReviewCard";
 
 class VenuePage extends Component {
   state = {
@@ -48,7 +49,19 @@ class VenuePage extends Component {
     let interiorRating = 0;
 
     let galleryImages = null;
-    let reviews = null;
+    let reviews = this.props.reviews.map(rew => {
+      return <ReviewCard
+        key={rew._id}
+        id={rew._id}
+        venueId={this.props.match.params.venueId}
+        comment={rew.comment}
+        foodRating={rew.foodRating}
+        serviceRating={rew.serviceRating}
+        interiorRating={rew.interiorRating}
+        user={rew.user.displayName}
+        date={rew.createdOn}
+      />
+    });
 
     if(this.props.venue){
       title = this.props.venue.title;
@@ -215,8 +228,9 @@ class VenuePage extends Component {
               </FormGroup>
             </div>
 
-            <Button onClick={this.onSubmitHandler}>Submit review</Button>
+            <Button color='success' onClick={this.onSubmitHandler}>Submit review</Button>
           </Form>
+
         </div>
       </Container>
     );
@@ -225,6 +239,7 @@ class VenuePage extends Component {
 
 const mapStateToProps = state => ({
   venue: state.venues.venue,
+  reviews: state.reviews.venueReviews,
 });
 
 const mapDispatchToProps = dispatch => ({

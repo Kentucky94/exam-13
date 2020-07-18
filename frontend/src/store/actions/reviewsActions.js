@@ -8,7 +8,7 @@ export const getVenueReviewsSuccess = reviews => ({type: GET_VENUE_REVIEWS_SUCCE
 export const getVenueReviews = venueId => {
   return async dispatch => {
     try{
-      const response = await axiosOrders.get(`reviews/${venueId}`);
+      const response = await axiosOrders.get(`/reviews/${venueId}`);
 
       dispatch(getVenueReviewsSuccess(response.data))
     }catch(error){
@@ -20,8 +20,22 @@ export const getVenueReviews = venueId => {
 export const postReview = (venueId, reviewData) => {
   return async dispatch => {
     try{
-      await axiosOrders.post(`reviews/${venueId}`, reviewData);
-      await axiosOrders.post(`venues/reRate/${venueId}`);
+      await axiosOrders.post(`/reviews/${venueId}`, reviewData);
+      await axiosOrders.post(`/venues/reRate/${venueId}`);
+
+      dispatch(getVenueReviews(venueId));
+      dispatch(getVenue(venueId));
+    }catch(error){
+      console.log(error)
+    }
+  }
+};
+
+export const deleteReview = (reviewId, venueId) => {
+  return async dispatch => {
+    try{
+      await axiosOrders.delete(`/reviews/${reviewId}`);
+      await axiosOrders.post(`/venues/reRate/${venueId}`);
 
       dispatch(getVenueReviews(venueId));
       dispatch(getVenue(venueId));

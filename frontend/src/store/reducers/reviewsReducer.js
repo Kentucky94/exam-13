@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const reviewsReducer = (state = initialState, action) => {
-  switch(action.data){
+  switch(action.type){
     case GET_VENUE_REVIEWS_SUCCESS:
       return {...state, venueReviews: action.reviews};
     default:

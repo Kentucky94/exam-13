@@ -12,30 +12,7 @@ export const loginUserSuccess = user => ({type: LOGIN_USER_SUCCESS, user});
 export const logoutUserSuccess = () => ({type: LOGOUT_USER_SUCCESS});
 export const fetchUserSuccess = pageUser => ({type: FETCH_USER_SUCCESS, pageUser});
 
-export const fetchUser = userId => {
-  return async dispatch => {
-    try{
-      const response = await axiosOrders.get('/users/' + userId);
 
-      dispatch(fetchUserSuccess(response.data));
-    }catch(error){
-      console.log(error);
-    }
-  }
-};
-
-export const loginWithFacebook = facebookData => {
-  return async dispatch => {
-    try{
-      const response = await axiosOrders.post('users/facebook', facebookData);
-
-      dispatch(loginUserSuccess(response.data));
-      dispatch(push('/'));
-    }catch(error){
-      console.log(error);
-    }
-  }
-};
 
 export const registerUser = userData => {
   return async dispatch => {
@@ -67,7 +44,7 @@ export const loginUser = userData => {
 export const logoutUser = () => {
   return async dispatch => {
     try{
-      await axiosOrders.delete('users/sessions');
+      await axiosOrders.delete('/users/sessions');
 
       dispatch(logoutUserSuccess());
       dispatch(push('/'));

@@ -10,8 +10,11 @@ import './index.css';
 import App from './App';
 import {loadFromLocalStorage, localStorageMiddleware} from "./store/localStorage";
 import * as serviceWorker from './serviceWorker';
+
 import usersReducer from "./store/reducers/usersReducer";
 import venuesReducer from "./store/reducers/venuesReducer";
+import reviewsReducer from "./store/reducers/reviewsReducer";
+
 
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,6 +27,7 @@ const rootReducer = combineReducers({
   router: connectRouter(history),
   users: usersReducer,
   venues: venuesReducer,
+  reviews: reviewsReducer,
 });
 
 const middleware = [
