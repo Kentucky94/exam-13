@@ -5,6 +5,7 @@ import {Button, Container, Form, FormGroup, Input, Label, Table} from "reactstra
 import StarRatings from "react-star-ratings";
 
 import {getVenue} from "../../store/actions/venuesActions";
+import {getVenueReviews, postReview} from "../../store/actions/reviewsActions";
 
 class VenuePage extends Component {
   state = {
@@ -15,7 +16,8 @@ class VenuePage extends Component {
   };
 
   async componentDidMount() {
-    this.props.getVenue(this.props.match.params.venueId);
+    await this.props.getVenue(this.props.match.params.venueId);
+    await this.props.getReviews(this.props.match.params.venueId);
   }
 
   inputChangeHandler = event => {
@@ -33,15 +35,7 @@ class VenuePage extends Component {
   onSubmitHandler = event => {
     event.preventDefault();
 
-    const formData = new FormData();
-
-    Object.keys(this.state).forEach(key => {
-      const value = this.state[key];
-
-      formData.append(key, value)
-    });
-
-
+    this.props.postReview(this.props.match.params.venueId, {...this.state});
   };
 
   render() {
@@ -235,6 +229,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getVenue: venueId => dispatch(getVenue(venueId)),
+  getReviews: venueId => dispatch(getVenueReviews(venueId)),
+  postReview: (venueId, reviewData) => dispatch(postReview(venueId, reviewData)),
 });
 
 VenuePage.propTypes = {
