@@ -11,9 +11,10 @@ import App from './App';
 import {loadFromLocalStorage, localStorageMiddleware} from "./store/localStorage";
 import * as serviceWorker from './serviceWorker';
 import usersReducer from "./store/reducers/usersReducer";
+import venuesReducer from "./store/reducers/venuesReducer";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const history = createBrowserHistory();
 
@@ -22,6 +23,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
   router: connectRouter(history),
   users: usersReducer,
+  venues: venuesReducer,
 });
 
 const middleware = [
