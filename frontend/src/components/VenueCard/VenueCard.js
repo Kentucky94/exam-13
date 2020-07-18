@@ -19,9 +19,9 @@ const VenueCard = props => {
   const user = useSelector(state => state.users.user);
 
   return (
-    <Card className='venueCard col-sm-6 col-md-4 mb-4 p-2' tag={NavLink} to={`venues/${props.id}`}>
+    <Card className='col-sm-6 col-md-4 mb-4 p-2'>
       <CardImg top width="100%" height="45%" src={`${config.apiURL}/uploads/${props.image}`} alt="Card image cap" />
-      <CardBody>
+      <CardBody className='venueCard' tag={NavLink} to={`venues/${props.id}`}>
         <CardTitle>{props.title}</CardTitle>
         <CardText>{props.description}</CardText>
         <div className='w-100 py-3 flex-grow-1'>
@@ -35,15 +35,15 @@ const VenueCard = props => {
           />
           <span className='pl-2'>({props.rating})</span>
         </div>
-        <div className='d-flex justify-content-between'>
-          {user && user.role === 'admin' ?
-            <Button color='danger' onClick={() => dispatch(deleteVenue(props.id))}>
-              Delete
-            </Button> :
-            null
-          }
-        </div>
       </CardBody>
+      <div className='d-flex justify-content-between'>
+        {user && user.role === 'admin' ?
+          <Button color='danger' onClick={() => dispatch(deleteVenue(props.id))}>
+            Delete
+          </Button> :
+          null
+        }
+      </div>
     </Card>
   );
 };
