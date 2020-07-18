@@ -3,7 +3,8 @@ const {nanoid} = require('nanoid');
 
 const config = require('./config');
 const User = require('./models/User');
-const Recipe = require('./models/Recipe');
+const Venue = require('./models/Venue');
+const Review = require('./models/Review');
 
 const run = async () => {
   await mongoose.connect(config.database, config.databaseOptions);
@@ -32,27 +33,44 @@ const run = async () => {
     displayName: 'Jill Valentine',
   });
 
-  const [rec1, rec2, rec3] = await Recipe.create({
-    title: 'The first recipe',
+  const [ven1, ven2, ven3] = await Venue.create({
+    title: 'The first venue',
     user: user1,
-    mainImage: '/recipe1.jpg',
-    description: 'Recipe by user1',
+    mainImage: '/venue1.jpg',
+    description: 'Venue owned by user1',
   }, {
-    title: 'The second recipe',
+    title: 'The second venue',
     user: user2,
-    mainImage: '/recipe2.jpg',
-    description: 'Recipe by user2',
-    easyToCookRating: 4,
-    quickToCookRating: 3,
-    tasteRating: 4,
+    mainImage: '/venue2.jpg',
+    description: 'Venue owned by user2',
   }, {
-    title: 'The third recipe',
+    title: 'The third venue',
     user: user3,
-    mainImage: '/recipe3.jpg',
-    description: 'Recipe by user3',
-    easyToCookRating: 4,
-    quickToCookRating: 3,
-    tasteRating: 5,
+    mainImage: '/venue3.jpg',
+    description: 'Venue owned by user3',
+  });
+
+  const [rew1, rew2, rew3] = await Review.create({
+    user: user1,
+    venue: ven2,
+    comment: 'Good',
+    foodRating: 4,
+    serviceRating: 3,
+    interiorRating: 5,
+  }, {
+    user: user2,
+    venue: ven3,
+    comment: 'Average',
+    foodRating: 3,
+    serviceRating: 3,
+    interiorRating: 4,
+  }, {
+    user: user3,
+    venue: ven1,
+    comment: 'Bad',
+    foodRating: 3,
+    serviceRating: 3,
+    interiorRating: 2,
   });
 
   mongoose.connection.close();

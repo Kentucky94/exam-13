@@ -4,11 +4,11 @@ const env = process.env.NODE_ENV;
 
 const rootPath = __dirname;
 
-let database = 'mongodb://localhost/exam13lab';
+let database = 'mongodb://localhost/exam13';
 let port = 8080;
 
 if(env === 'test'){
-  database = 'mongodb://localhost/exam13lab-test';
+  database = 'mongodb://localhost/exam13-test';
   port = 8090;
 }
 

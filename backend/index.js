@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const config = require('./config');
 const users = require('./app/users');
-const recipes = require('./app/recipes');
+const venues = require('./app/venues');
 const reviews = require('./app/reviews');
 
 const app = express();
@@ -17,7 +17,7 @@ const run = async () => {
   await mongoose.connect(config.database, config.databaseOptions);
 
   app.use('/users', users);
-  app.use('/recipes', recipes);
+  app.use('/venues', venues);
   app.use('/reviews', reviews);
 
   app.listen(config.port, () => {

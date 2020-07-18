@@ -6,24 +6,24 @@ const ReviewSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  recipe: {
+  venue: {
     type: mongoose.Schema.Types.ObjectID,
-    ref: 'Recipe',
+    ref: 'Venue',
     required: true,
   },
   comment: {
     type: String,
     default: '',
   },
-  easyToCookRating: {
+  foodRating: {
     type: Number,
     required: true,
   },
-  quickToCookRating: {
+  serviceRating: {
     type: Number,
     required: true,
   },
-  tasteRating: {
+  interiorRating: {
     type: Number,
     required: true,
   },
