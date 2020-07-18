@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import FormElement from "../../components/UI/FormElement/FormElement";
-import {Button, Col, Form, FormGroup} from "reactstrap";
+import {Button, Form} from "reactstrap";
 import {connect} from "react-redux";
 import {postVenue} from "../../store/actions/venuesActions";
 
@@ -66,7 +66,7 @@ class AddVenuePage extends Component {
             required
           />
           <div className='d-flex justify-content-start align-items-center'>
-            <span className='mr-2'>I have read and understood the <a href="#">Terms and Conditions</a></span>
+            <span className='mr-2'>I have read and understood the Terms and Conditions</span>
 
             <FormElement
               propertyName="isAgreed"
