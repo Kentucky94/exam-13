@@ -7,6 +7,9 @@ import StarRatings from "react-star-ratings";
 import {getVenue} from "../../store/actions/venuesActions";
 import {getVenueReviews, postReview} from "../../store/actions/reviewsActions";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
+import {getVenueImages, postVenueImage} from "../../store/actions/imagesActions";
+import ImageBlock from "../../components/ImageBlock/ImageBlock";
+import FormElement from "../../components/UI/FormElement/FormElement";
 
 class VenuePage extends Component {
   state = {
@@ -14,11 +17,13 @@ class VenuePage extends Component {
     foodRating: 0,
     serviceRating: 0,
     interiorRating: 0,
+    image: '',
   };
 
   async componentDidMount() {
     await this.props.getVenue(this.props.match.params.venueId);
     await this.props.getReviews(this.props.match.params.venueId);
+    await this.props.getImages(this.props.match.params.venueId);
   }
 
   inputChangeHandler = event => {
@@ -39,6 +44,16 @@ class VenuePage extends Component {
     this.props.postReview(this.props.match.params.venueId, {...this.state});
   };
 
+  onUploadHandler = event => {
+    event.preventDefault();
+
+    const formdata = new FormData();
+
+    formdata.append('image', this.state.image);
+
+    this.props.postImage(this.props.match.params.venueId, formdata)
+  };
+
   render() {
     let title = null;
     let description = null;
@@ -48,7 +63,13 @@ class VenuePage extends Component {
     let serviceRating = 0;
     let interiorRating = 0;
 
-    let galleryImages = null;
+    let galleryImages = this.props.images.map(img => {
+      return <ImageBlock
+        key={img._id}
+        image={img.image}
+      />
+    });
+
     let reviews = this.props.reviews.map(rew => {
       return <ReviewCard
         key={rew._id}
@@ -230,7 +251,20 @@ class VenuePage extends Component {
 
             <Button color='success' onClick={this.onSubmitHandler}>Submit review</Button>
           </Form>
+        </div>
 
+        <div className='border border-dark rounded p-4 my-4'>
+          <Form>
+            <FormElement
+              propertyName="image"
+              title="Venue image"
+              type="file"
+              onChange={this.fileChangeHandler}
+            />
+            <Button color='success' onClick={this.onUploadHandler}>
+              Upload
+            </Button>
+          </Form>
         </div>
       </Container>
     );
@@ -240,12 +274,15 @@ class VenuePage extends Component {
 const mapStateToProps = state => ({
   venue: state.venues.venue,
   reviews: state.reviews.venueReviews,
+  images: state.images.venueImages,
 });
 
 const mapDispatchToProps = dispatch => ({
   getVenue: venueId => dispatch(getVenue(venueId)),
   getReviews: venueId => dispatch(getVenueReviews(venueId)),
+  getImages: venueId => dispatch(getVenueImages(venueId)),
   postReview: (venueId, reviewData) => dispatch(postReview(venueId, reviewData)),
+  postImage: (venueId, imageData) => dispatch(postVenueImage(venueId, imageData)),
 });
 
 VenuePage.propTypes = {
